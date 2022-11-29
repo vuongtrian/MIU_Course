@@ -1,0 +1,7 @@
+Question: Can you change the size of the array once you define it? OR Can you insert
+          or delete the elements after creating an array?
+
+Answer:
+We can't change the size of the array after define it
+We can't insert or delete the elements after creating an array
+Because array is fixed size in memory after we define it

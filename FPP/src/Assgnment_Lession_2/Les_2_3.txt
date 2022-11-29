@@ -1,0 +1,28 @@
+Question:
+What will be the output of the following?
+A.
+class Demo1 {
+public static void main(String args[]) {
+int i[] = new int[10];
+System.out.println(i[8]);
+}
+}
+B.
+class Demo2{
+public static void main(String args[]) {
+Student students[] = new Student[10];
+System.out.println(students[5]);
+}
+}
+C.
+class Demo3{
+public static void main(String args[]) {
+Student students[] = new Student[10];
+System.out.println(students[5].getName());
+}
+}
+
+Answer:
+A. 0
+B. null
+C. exception

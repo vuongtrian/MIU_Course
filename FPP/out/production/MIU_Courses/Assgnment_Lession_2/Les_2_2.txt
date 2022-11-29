@@ -1,0 +1,24 @@
+
+Question: What will be the output of the following program?
+public class Les_2_2 {
+    public static void main(String[] args) {
+        Student[] student = new Student[2];
+        student[0] = new Student();
+        student[0].name = "Khan";
+        student[0] = new Student();
+        student[0].name = "Kittu";
+        student[1] = new Student();
+        student[1].name = "Munna";
+        for (Student element: student) {
+            System.out.print(element.name + " ~ ");
+        }
+    }
+}
+
+class Student {
+    String name;
+}
+
+Answer:
+Output will be Kittu ~ Munna ~
+Because line 12 we create new object and it override the original object (line 10)
