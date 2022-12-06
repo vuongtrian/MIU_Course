@@ -1,0 +1,36 @@
+3. Up-casting: change the type of Child Object to Parent Object, then we can access to variable and method in parent class
+   Down-casting: change the type of Parent Object to Child Object, then we can access to variable and method in both parent and child class
+   Example:
+   class Parent {
+       String name = "Parent";
+
+       public void print() {
+           System.out.println("From Parent");
+       }
+   }
+
+   class Child extends Parent {
+       String name = "Child";
+
+       @Override
+       public void print() {
+           System.out.println("From Child");
+       }
+   }
+   public class TestUpCasting {
+       public static void main(String[] args) {
+           Parent parent = new Child();
+           System.out.println(parent.name); // Parent
+           parent.print(); // From Child
+       }
+   }
+   public class TestDowncating {
+       public static void main(String[] args) {
+           Parent parent = new Child();
+           if (parent instanceof Child) {
+               Child child = (Child) parent;
+               System.out.println(child.name); // Child
+               child.print(); // Child method
+           }
+       }
+   }

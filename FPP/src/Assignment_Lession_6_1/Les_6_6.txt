@@ -1,0 +1,15 @@
+6.
+Q:What classes would you design for the program?
+A:I will design based class is Asset.
+After that, all classes ElectronicAppliances, Automobiles, Furniture, CompactDisks will extend Asset class.
+
+Q:Would you define four unrelated classes or one superclass and four subclasses?
+A:We can define unrelated classes is AsserManager to manage list of Asset.
+
+Q:If you design a superclass, will it be an abstract superclass?
+A:We can define abstract superclass to execute some method which can apply for all type of Asset like calculateUsedTime...
+
+Q:Implement the asset-tracking program of Exercise 10.
+Allow the user to add, modify, and delete electronic appliances, automobiles, furniture, and compact disks.
+Allow the user to list the assets by category and search for an asset by its serial number
+A: I have no detail to implement the asset-tracking program
