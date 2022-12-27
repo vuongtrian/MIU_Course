@@ -7,20 +7,20 @@ import java.awt.event.ActionListener;
 public class Les_9_3 {
     public static void main(String[] args) {
         new Calculator();
-//        String str = "123+32/12";
-//        System.out.println(str.indexOf("+"));
+//        String str = "123+32";
+//        System.out.println(str.indexOf("/"));
 
     }
 }
 
-class Calculator extends JFrame implements ActionListener{
+class Calculator extends JFrame implements ActionListener {
     JTextField tf1, tf2;
     JLabel result, operand;
-    JButton b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,point,add,sub,mul,dev,ope,res,cle;
+    JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, point, add, sub, mul, dev, ope, res, cle;
 
     Calculator() {
         operand = new JLabel("Operand");
-        operand.setBounds(10, 20, 100,40);
+        operand.setBounds(10, 20, 100, 40);
 
         tf1 = new JTextField();
         tf1.setEnabled(false);
@@ -71,7 +71,7 @@ class Calculator extends JFrame implements ActionListener{
         add.setBounds(50, 140, 30, 30);
         add.addActionListener(this);
         sub = new JButton("-");
-        sub.setBounds(90, 140,30,30);
+        sub.setBounds(90, 140, 30, 30);
         sub.addActionListener(this);
         mul = new JButton("x");
         mul.setBounds(130, 140, 30, 30);
@@ -92,103 +92,122 @@ class Calculator extends JFrame implements ActionListener{
             }
         });
         cle = new JButton("Clear");
-        cle.setBounds(130, 180, 50,50);
-        cle.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tf1.setText("");
-            }
-        });
+        cle.setBounds(130, 180, 50, 50);
+        cle.addActionListener(this);
 
-        add(operand); add(tf1);
-        add(result); add(tf2);
-        add(b0);add(b1); add(b2); add(b3);add(b4);add(b5);add(b6);add(b7);add(b8);add(b9);
-        add(point);add(add);add(sub);add(mul);add(dev);
-        add(ope);add(res);add(cle);
-        setSize(1000,1000);
+        add(operand);
+        add(tf1);
+        add(result);
+        add(tf2);
+        add(b0);
+        add(b1);
+        add(b2);
+        add(b3);
+        add(b4);
+        add(b5);
+        add(b6);
+        add(b7);
+        add(b8);
+        add(b9);
+        add(point);
+        add(add);
+        add(sub);
+        add(mul);
+        add(dev);
+        add(ope);
+        add(res);
+        add(cle);
+        setSize(1000, 1000);
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    String operandStr = "";
+    double num1 = 0;
+    double num2 = 0;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        double num1 = 0;
-        double num2 = 0;
-        String operandStr = "";
-        String temp = "";
+        operandStr += getTextFromUser(b0, e);
+        operandStr += getTextFromUser(b1, e);
+        operandStr += getTextFromUser(b2, e);
+        operandStr += getTextFromUser(b3, e);
+        operandStr += getTextFromUser(b4, e);
+        operandStr += getTextFromUser(b5, e);
+        operandStr += getTextFromUser(b6, e);
+        operandStr += getTextFromUser(b7, e);
+        operandStr += getTextFromUser(b8, e);
+        operandStr += getTextFromUser(b9, e);
+        operandStr += getTextFromUser(add, e);
+        operandStr += getTextFromUser(sub, e);
+        operandStr += getTextFromUser(mul, e);
+        operandStr += getTextFromUser(dev, e);
 
-        if (e.getSource() == b0) {
-            if(!temp.equals("")) {
-                temp += "0";
-            }
-        } else if (e.getSource() == b1) {
-            temp += "1";
-        } else if (e.getSource() == b2) {
-            temp += "2";
-        } else if (e.getSource() == b3) {
-            temp += "3";
-        } else if (e.getSource() == b4) {
-            temp += "4";
-        } else if (e.getSource() == b5) {
-            temp += "5";
-        } else if (e.getSource() == b6) {
-            temp += "6";
-        } else if (e.getSource() == b7) {
-            temp += "7";
-        } else if (e.getSource() == b8) {
-            temp += "8";
-        } else if (e.getSource() == b9) {
-            temp += "9";
-        } else if (e.getSource() == point) {
-            if(temp.equals("")) {
-                temp += "0.";
+        if(e.getSource() == point) {
+            if(operandStr.equals("")) {
+                operandStr += "0.";
             } else {
-                temp += ".";
+                operandStr += point.getText();
             }
-        } else if (e.getSource() == add) {
-            if(temp.equals("")) {
-                num1 = 0;
-                operandStr += String.valueOf(num1);
+        }
+
+
+        tf1.setText(operandStr);
+
+        if (e.getSource() == ope) {
+            String temp = operandStr;
+            int pos = -1;
+            if (temp.contains("+")) {
+                pos = temp.indexOf("+");
+                String num_1_Str = temp.substring(0,pos);
+                num1 = Double.valueOf(num_1_Str);
+                String num_2_Str = temp.substring(pos+1, temp.length());
+                num2 = Double.valueOf(num_2_Str);
+                Double res = num1 + num2;
+                tf2.setText(String.valueOf(res));
+            } else if(temp.contains("-")) {
+                pos = temp.indexOf("-");
+                String num_1_Str = temp.substring(0,pos);
+                num1 = Double.valueOf(num_1_Str);
+                String num_2_Str = temp.substring(pos+1, temp.length());
+                num2 = Double.valueOf(num_2_Str);
+                Double res = num1 - num2;
+                tf2.setText(String.valueOf(res));
+            } else if (temp.contains("x")) {
+                pos = temp.indexOf("x");
+                String num_1_Str = temp.substring(0,pos);
+                num1 = Double.valueOf(num_1_Str);
+                String num_2_Str = temp.substring(pos+1, temp.length());
+                num2 = Double.valueOf(num_2_Str);
+                Double res = num1 * num2;
+                tf2.setText(String.valueOf(res));
+            } else if (temp.contains("/")) {
+                pos = temp.indexOf("x");
+                String num_1_Str = temp.substring(0,pos);
+                num1 = Double.valueOf(num_1_Str);
+                String num_2_Str = temp.substring(pos+1, temp.length());
+                num2 = Double.valueOf(num_2_Str);
+                Double res = num1 / num2;
+                tf2.setText(String.valueOf(res));
             } else {
-                num1 = Double.valueOf(temp);
+                tf2.setText(temp);
             }
-            operandStr += String.valueOf(num1) + " + ";
-            temp = "";
-        } else if (e.getSource() == sub) {
-            if(temp.equals("")) {
-                num1 = 0;
-            } else {
-                num1 = Double.valueOf(temp);
-            }
-            operandStr += String.valueOf(num1) + " - ";
-            temp = "";
-        }  else if (e.getSource() == mul) {
-            if(temp.equals("")) {
-                num1 = 0;
-            } else {
-                num1 = Double.valueOf(temp);
-            }
-            operandStr += String.valueOf(num1) + " * ";
-            temp = "";
-        } else if (e.getSource() == dev) {
-            if(temp.equals("")) {
-                num1 = 0;
-            } else {
-                num1 = Double.valueOf(temp);
-            }
-            operandStr += String.valueOf(num1) + " / ";
-            temp = "";
-        } else if (e.getSource() == ope) {
-            if(temp.equals("")) {
-                num2 = 0;
-            } else {
-                num2 = Double.valueOf(temp);
-            }
-            operandStr += String.valueOf(num2);
-            tf1.setText(operandStr);
-            temp = "";
+        }
+
+        if(e.getSource() == cle) {
+            operandStr = "";
+            tf1.setText("");
         }
     }
+
+
+    public String getTextFromUser(JButton b, ActionEvent e) {
+        String str = "";
+        if (e.getSource() == b) {
+            str += b.getText();
+        }
+        return str;
+    }
+
 }
