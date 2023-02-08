@@ -1,0 +1,2 @@
+Explain: the result is false because method listsAreEqual always return false
+Reason: Employee use mutable boolean visited and the hashCode() of the key objects that you put into the collection will change

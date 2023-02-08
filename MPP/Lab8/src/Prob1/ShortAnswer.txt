@@ -1,0 +1,25 @@
+1a:
+- The parameters: s,t
+- Free variables: none
+1b:
+- The parameters: s,t
+- Free variables: ignoreCase
+b:
+i & ii:
+public static void main(String[] args) {
+        Supplier<Double> random = () -> Math.random();
+        System.out.println(random.get());
+}
+iii:
+public class InnerClass implements Supplier {
+    @Override
+    public Object get() {
+        return Math.random();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        InnerClass inner = new InnerClass();
+        System.out.println(inner.get());
+    }
+}

@@ -1,0 +1,5 @@
+Explain: the result is false because method listsAreEqual always return false
+Reason: Employee class didn't override equals & hashCode,
+the collection use a hashcode value of an object to determine how it should be stored inside a collection,
+and the hashcode is used again in order to locate the object in its collection.
+Since you created two different objects, while they have the same value as attributes they're two distincts objects and hence return false

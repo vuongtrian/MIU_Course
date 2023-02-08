@@ -1,0 +1,4 @@
+Explain: the result is false because method listsAreEqual always return false
+Reason: Employee class only override equals without hashCode. In the first call hashMap.put, it hash to some bucket
+and next call hashMap.put, it hash to another bucket.
+So, although they are equal, as they don't hash to the same bucket, the map can't realize it and both of them stay in the map.
