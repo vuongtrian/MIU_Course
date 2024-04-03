@@ -1,0 +1,13 @@
+framework/Autowired.class
+application/Application.class
+framework/Qualifier.class
+application/AddCalculator.class
+framework/FWContext.class
+framework/Service.class
+application/SubCalculator.class
+application/FWApplication.class
+application/IMyTest.class
+application/MyTest.class
+framework/Inject.class
+application/ICalculator.class
+framework/Value.class
