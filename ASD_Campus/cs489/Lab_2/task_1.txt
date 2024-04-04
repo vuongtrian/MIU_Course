@@ -1,0 +1,21 @@
+OfficeManage:
+- Register Dentists
+- Enroll new Patients
+- Book appointment and system send a confirmation email notifying the Patient
+
+Dentist:
+- Sign-in to system and view a listing of all their appointments (including Patient who have been scheduled)
+- Can not be given 5 appointments a week
+
+Patient:
+- Request appointments to see dentist by call / online form
+- Sign-in to system and view their appointments, including dentist information who they have been booked
+- Able to request to cancel or change appointment
+- Can't book appointment if any outstanding, unpaid bill
+
+Appointment
+- Have specific date and time
+- Have dentist information
+
+Treatment
+- Provide information about each Surgery

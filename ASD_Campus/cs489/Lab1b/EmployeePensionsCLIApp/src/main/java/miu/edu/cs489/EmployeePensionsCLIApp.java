@@ -56,6 +56,7 @@ public class EmployeePensionsCLIApp {
                 .filter(employee -> employee.getEmploymentDate().plusYears(5).isAfter(firstDayOfNextMonth) &&
                         employee.getEmploymentDate().plusYears(5).isBefore(lastDayOfNextMonth))
                 .collect(Collectors.toList());
+        qualifiedEmp.sort(Comparator.comparing(Employee::getEmploymentDate));
         printJSON(qualifiedEmp);
     }
 }
