@@ -1,0 +1,18 @@
+Project Name: A-Hotel Reservation
+Customer:
+- Browse rooms
+- Search rooms
+- Reserve / update/ cancel a room
+- Can view their reservation
+- Login and logout
+
+Reservation:
+- Whenever a customer reserves a room, the system sends an email to the customer
+- Every reservation has a unique reservation number
+- For every reservation, the system records the stat date, end date, total price,
+number of guest, room, customer first name, last name, email, address info and credit card info
+- Whenever the customer places a reservation, cancel or change a reservation,
+we want to measure the time it takes for the actions to execute and store the result to database
+
+Room:
+- For every room, the system records the room number, room type, room price, bed type, number of beds
