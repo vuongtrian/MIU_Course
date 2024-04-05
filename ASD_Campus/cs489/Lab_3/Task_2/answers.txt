@@ -1,0 +1,36 @@
+1.What is Spring?
+- Spring is open source development framework for Enterprise Java.
+- Spring framework can be used in developing any Java application
+- Spring framework targets to make Java EE development easier to use and promote good programming practice by enabling a POJO- based programming model.
+
+2.What is Spring Boot?
+- Spring Boot is a project that is built on the top of the Spring Framework.
+- Spring Boot offers a fast way to build applications.
+- With Spring Boot, you can focus more on business features and less on infrastructure.
+
+3.What is the relation between Spring platform and Spring Boot?
+- Spring:
+    * Spring is an open-source web application framework based on Java.
+    * Spring provides a flexible, completely configurable environment using tools and libraries of prebuilt code to create customized, loosely coupled web apps.
+    * The key feature of Spring is DI (Dependency Injection)
+- Spring Boot
+    * Spring Boot is an extension or module built on the Spring framework
+    * Spring Boot provides the ability to create, standalone Spring applications that can just run immediately without the need for annotations,
+XML configuration, or writing lots of additional code.
+    * The key feature of Spring Boot is autoconfiguration
+
+4.What is the relation between Spring platform and Spring framework?
+- The core capabilities that Java Spring Boot provides beyond the Spring framework.
+- Spring Boot gives an easier, quicker path to set up, configure, and run apps.
+- It eliminates the heavy lifting of configuration that is required for setting up most Spring-based apps.
+- Developers can jump right in and use Spring Boot without ever having to learn the underlying Spring framework.
+
+5.What is Dependency Injection and how is it done in the Spring platform/framework?
+- Dependency Injection, an aspect of Inversion of Control (IoC), is a general concept, and it can be expressed in many different ways.
+- This concept says that you do not create your objects but describe how they should be created.
+- You don’t directly connect your components and services together in code but describe which services are needed by which components in a configuration file.
+- A container (the IOC container) is then responsible for hooking it all up
+
+6.What is Inversion of Control (IoC) and how is it related to Spring?
+- The Spring IoC is responsible for creating the objects,managing them (with dependency injection (DI)),
+wiring them together, configuring them, as also managing their complete lifecycle
