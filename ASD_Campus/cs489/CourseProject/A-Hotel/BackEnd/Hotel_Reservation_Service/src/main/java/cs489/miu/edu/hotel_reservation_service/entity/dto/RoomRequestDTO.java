@@ -34,7 +34,7 @@ public class RoomRequestDTO {
     private String bedType;
 
     @Min(value = 1, message = "Number of beds must be greater than or equal to 1")
-    @Max(value = 5, message = "")
+    @Max(value = 5, message = "Number of beds must be lower than or equal to 5")
     private Integer numberOfBeds;
 
     @Size(max = 500,

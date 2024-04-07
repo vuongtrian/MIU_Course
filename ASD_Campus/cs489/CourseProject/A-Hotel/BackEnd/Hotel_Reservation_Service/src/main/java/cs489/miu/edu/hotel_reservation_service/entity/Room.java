@@ -21,6 +21,6 @@ public class Room {
     private String bedType;
     private Integer numberOfBeds;
     private String description;
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<Reservation> reservations = new ArrayList<>();
 }
