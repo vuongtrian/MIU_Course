@@ -1,0 +1,7 @@
+User:
+  - add username & password for authentication
+  - passwordencoder using Spring Security - BCryptPasswordEncoder
+
+Image:
+  - Store in local folder
+  - Store image path into DB
