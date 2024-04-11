@@ -1,6 +1,7 @@
 User:
   - add username & password for authentication
   - passwordencoder using Spring Security - BCryptPasswordEncoder
+  - Consider to extend available User class in SpringBoot
   - CustomerRequestDTO contains password
   - CustomerResponseDTO doesn't contains password
   - Customer can upload thier own avatar (ont 1 photo)
