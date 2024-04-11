@@ -1,6 +1,9 @@
 User:
   - add username & password for authentication
   - passwordencoder using Spring Security - BCryptPasswordEncoder
+  - CustomerRequestDTO contains password
+  - CustomerResponseDTO doesn't contains password
+  - Customer can upload thier own avatar (ont 1 photo)
 
 Image:
   - Store in local folder
