@@ -12,18 +12,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private String email;
+@DiscriminatorValue("customer")
+public class Customer extends User{
     @Embedded
     private Address address;
     @Embedded
     private CreditCard creditCard;
     @OneToMany(mappedBy = "customer")
     private List<Reservation> reservations = new ArrayList<>();
+
+
 }
