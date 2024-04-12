@@ -16,11 +16,9 @@ import java.util.List;
 public class Room {
     @Id
     private Integer roomNumber;
-    private String type;
-    private BigDecimal price;
-    private String bedType;
-    private Integer numberOfBeds;
-    private String description;
+    @OneToOne
+    private RoomDetail roomDetail;
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<Reservation> reservations = new ArrayList<>();
+
 }
