@@ -14,9 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class UserRequestDTO {
-    @NotBlank(message = "user role should NOT be NULL or EMPTY")
-    private String role;
+public class CustomerRequestDTO {
     @NotBlank(message = "username should NOT be NULL or EMPTY")
     private String username;
     @NotBlank(message = "password should NOT be NULL or EMPTY")
@@ -33,7 +31,8 @@ public class UserRequestDTO {
     private String phoneNumber;
     @NotBlank(message = "Email should NOT be NULL or EMPTY")
     private String email;
+    @NotNull(message = "Address should not be null")
     private Address address;
+    @NotNull(message = "CreditCard should not be null")
     private CreditCard creditCard;
-    private String region;
 }

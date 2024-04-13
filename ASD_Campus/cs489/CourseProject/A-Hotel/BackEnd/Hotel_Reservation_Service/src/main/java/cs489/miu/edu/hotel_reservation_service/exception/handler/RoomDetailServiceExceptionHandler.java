@@ -12,7 +12,7 @@ import java.util.Collections;
 @RestControllerAdvice
 public class RoomDetailServiceExceptionHandler extends CustomizedExceptionHandler{
     @ExceptionHandler(RoomDetailServiceException.class)
-    public APIResponse<?> handleServiceException(RoomDetailServiceException exception) {
+    public APIResponse<?> handleRoomDetailServiceException(RoomDetailServiceException exception) {
         APIResponse<?> serviceResponse = new APIResponse<>();
         serviceResponse.setStatus("FAILED");
         serviceResponse.setErrors(Collections.singletonList(new ErrorDTO("", exception.getMessage())));
@@ -20,7 +20,7 @@ public class RoomDetailServiceExceptionHandler extends CustomizedExceptionHandle
     }
 
     @ExceptionHandler(RoomDetailNotFoundException.class)
-    public APIResponse<?> handleReservationNotFoundException (RoomDetailNotFoundException exception) {
+    public APIResponse<?> handleRoomDetailNotFoundException (RoomDetailNotFoundException exception) {
         APIResponse<?> serviceResponse = new APIResponse<>();
         serviceResponse.setStatus("FAILED");
         serviceResponse.setErrors(Collections.singletonList(new ErrorDTO("", exception.getMessage())));

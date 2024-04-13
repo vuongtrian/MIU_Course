@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserResponseDTO {
+public class CustomerResponseDTO {
     private Integer id;
-    private String role;
     private String username;
     private Boolean enable;
     private String firstName;
@@ -22,5 +21,4 @@ public class UserResponseDTO {
     private String email;
     private Address address;
     private CreditCard creditCard;
-    private String region;
 }

@@ -12,7 +12,7 @@ import java.util.Collections;
 @RestControllerAdvice
 public class ReservationServiceExceptionHandler extends CustomizedExceptionHandler{
     @ExceptionHandler(ReservationServiceException.class)
-    public APIResponse<?> handleServiceException(ReservationServiceException exception) {
+    public APIResponse<?> handleReservationServiceException(ReservationServiceException exception) {
         APIResponse<?> serviceResponse = new APIResponse<>();
         serviceResponse.setStatus("FAILED");
         serviceResponse.setErrors(Collections.singletonList(new ErrorDTO("", exception.getMessage())));

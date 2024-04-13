@@ -12,7 +12,7 @@ import java.util.Collections;
 @RestControllerAdvice
 public class RoomServiceExceptionHandler extends CustomizedExceptionHandler{
     @ExceptionHandler(RoomServiceException.class)
-    public APIResponse<?> handleServiceException(RoomServiceException exception) {
+    public APIResponse<?> handleRoomServiceException(RoomServiceException exception) {
         APIResponse<?> serviceResponse = new APIResponse<>();
         serviceResponse.setStatus("FAILED");
         serviceResponse.setErrors(Collections.singletonList(new ErrorDTO("", exception.getMessage())));

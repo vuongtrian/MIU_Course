@@ -20,5 +20,4 @@ public class Room {
     private RoomDetail roomDetail;
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<Reservation> reservations = new ArrayList<>();
-
 }

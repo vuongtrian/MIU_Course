@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -32,4 +34,5 @@ public class RoomDetailRequestDTO {
     @Size(max = 500,
             message = "Bed type must be smaller than 500 characters")
     private String description;
+    private List<FileDataRequestDTO> images = new ArrayList<>();
 }

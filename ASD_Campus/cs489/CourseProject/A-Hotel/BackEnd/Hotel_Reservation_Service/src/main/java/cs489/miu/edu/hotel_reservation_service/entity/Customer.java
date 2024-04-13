@@ -1,18 +1,15 @@
 package cs489.miu.edu.hotel_reservation_service.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("customer")
 public class Customer extends User{
     @Embedded
     private Address address;

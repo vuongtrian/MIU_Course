@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,4 +19,5 @@ public class RoomDetailResponseDTO {
     private String bedType;
     private Integer numberOfBeds;
     private String description;
+    private List<FileDataResponseDTO> images = new ArrayList<>();
 }
