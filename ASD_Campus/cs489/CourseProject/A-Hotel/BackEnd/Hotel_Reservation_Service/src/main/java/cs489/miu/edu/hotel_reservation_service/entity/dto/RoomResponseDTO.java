@@ -13,9 +13,5 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RoomResponseDTO {
     private Integer roomNumber;
-    private String type;
-    private BigDecimal price;
-    private String bedType;
-    private Integer numberOfBeds;
-    private String description;
+    private RoomDetailResponseDTO roomDetail;
 }

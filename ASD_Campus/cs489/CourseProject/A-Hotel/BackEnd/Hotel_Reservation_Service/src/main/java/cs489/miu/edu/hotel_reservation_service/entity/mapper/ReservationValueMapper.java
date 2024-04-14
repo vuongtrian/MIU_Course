@@ -13,8 +13,8 @@ public class ReservationValueMapper {
         reservation.setEndDate(reservationRequestDTO.getEndDate());
         reservation.setTotalPrice(reservationRequestDTO.getTotalPrice());
         reservation.setNumberOfGuest(reservationRequestDTO.getNumberOfGuest());
-        reservation.setRoom(reservationRequestDTO.getRoom());
-        reservation.setCustomer(reservationRequestDTO.getCustomer());
+        reservation.setRoom(RoomValueMapper.convertToEntity(reservationRequestDTO.getRoom()));
+        reservation.setCustomer(CustomerValueMapper.convertToEntity(reservationRequestDTO.getCustomer()));
         return reservation;
     }
 
@@ -25,8 +25,8 @@ public class ReservationValueMapper {
         reservationResponseDTO.setEndDate(reservation.getEndDate());
         reservationResponseDTO.setTotalPrice(reservation.getTotalPrice());
         reservationResponseDTO.setNumberOfGuest(reservation.getNumberOfGuest());
-        reservationResponseDTO.setRoom(reservation.getRoom());
-        reservationResponseDTO.setCustomer(reservation.getCustomer());
+        reservationResponseDTO.setRoom(RoomValueMapper.convertToDTO(reservation.getRoom()));
+        reservationResponseDTO.setCustomer(CustomerValueMapper.convertToDTO(reservation.getCustomer()));
         return reservationResponseDTO;
     }
 

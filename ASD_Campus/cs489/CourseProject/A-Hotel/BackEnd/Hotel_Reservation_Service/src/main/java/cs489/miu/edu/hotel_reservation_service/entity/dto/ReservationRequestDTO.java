@@ -27,7 +27,7 @@ public class ReservationRequestDTO {
     @Max(value = 10, message = "Number of guest must be greater than or equal to 10")
     private Integer numberOfGuest;
     @NotNull(message = "Room should not be null")
-    private Room room;
+    private RoomRequestDTO room;
     @NotNull(message = "Customer should not be null")
-    private Customer customer;
+    private CustomerRequestDTO customer;
 }
