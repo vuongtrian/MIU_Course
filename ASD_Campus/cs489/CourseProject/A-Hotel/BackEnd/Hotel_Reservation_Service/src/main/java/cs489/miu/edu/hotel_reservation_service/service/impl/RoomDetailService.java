@@ -1,5 +1,6 @@
 package cs489.miu.edu.hotel_reservation_service.service.impl;
 
+import cs489.miu.edu.hotel_reservation_service.entity.FileData;
 import cs489.miu.edu.hotel_reservation_service.entity.RoomDetail;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.FileDataResponseDTO;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.RoomDetailRequestDTO;
@@ -13,7 +14,7 @@ import cs489.miu.edu.hotel_reservation_service.service.IRoomDetailService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,10 +29,7 @@ public class RoomDetailService implements IRoomDetailService {
         try {
             RoomDetail roomDetail = RoomDetailValueMapper.convertToEntity(roomDetailRequestDTO);
             RoomDetail roomDetailSaved = roomDetailRepository.save(roomDetail);
-            List<FileDataResponseDTO> images = saveImages(roomDetailRequestDTO.getImages());
-            RoomDetailResponseDTO roomDetailResponseDTO = RoomDetailValueMapper.convertToDTO(roomDetailSaved);
-            roomDetailResponseDTO.setImages(images);
-            return roomDetailResponseDTO;
+            return RoomDetailValueMapper.convertToDTO(roomDetailSaved);
         } catch (Exception e) {
             throw new RoomDetailServiceException("Exception occurred while create a new room detail");
         }
@@ -59,7 +57,7 @@ public class RoomDetailService implements IRoomDetailService {
         try {
             RoomDetail roomDetail = roomDetailRepository.findById(roomId)
                     .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomId));
-            roomDetail.getImages().stream().forEach(image -> {imageService.deleteImage(image.getId());});
+            roomDetail.getImages().forEach(image -> {imageService.deleteImage(image.getId());});
             roomDetailRepository.delete(roomDetail);
         } catch (Exception e) {
             throw new RoomDetailServiceException("Exception occurred while delete room detail id " + roomId);
@@ -86,12 +84,45 @@ public class RoomDetailService implements IRoomDetailService {
         }
     }
 
-    private List<FileDataResponseDTO> saveImages(List<MultipartFile> images) {
-        if (images == null || images.isEmpty()) {
-            return Collections.emptyList();
+    @Override
+    public RoomDetailResponseDTO addImages(Integer roomId, List<MultipartFile> imageFiles) {
+        RoomDetailResponseDTO roomDetailResponseDTO;
+
+        try {
+            RoomDetail roomDetail = roomDetailRepository.findById(roomId)
+                    .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomId));
+            List<FileData> images = new ArrayList<>();
+            List<FileDataResponseDTO> fileDataResponseDTOList = new ArrayList<>();
+            for (MultipartFile imageFile : imageFiles) {
+                FileDataResponseDTO imageFileResponseDTO = imageService.saveImage(imageFile);
+                fileDataResponseDTOList.add(imageFileResponseDTO);
+                FileData image = new FileData();
+                image.setId(imageFileResponseDTO.getId());
+                image.setType(imageFileResponseDTO.getType());
+                image.setName(imageFileResponseDTO.getName());
+                images.add(image);
+            }
+            roomDetail.setImages(images);
+            roomDetailResponseDTO = RoomDetailValueMapper.convertToDTO(roomDetailRepository.save(roomDetail));
+            roomDetailResponseDTO.setImages(fileDataResponseDTOList);
+
+            return roomDetailResponseDTO;
+        } catch (Exception e) {
+            throw new RoomDetailServiceException("Exception occurred while update image for room detail id " + roomId);
         }
-        return images.stream()
-                .map(imageService::saveImage)
-                .collect(Collectors.toList());
     }
+
+    @Override
+    public RoomDetailResponseDTO updateImages(Integer roomId, Integer imageId, MultipartFile image) {
+        return null;
+    }
+
+//    private List<FileDataResponseDTO> saveImages(List<MultipartFile> images) {
+//        if (images == null || images.isEmpty()) {
+//            return Collections.emptyList();
+//        }
+//        return images.stream()
+//                .map(imageService::saveImage)
+//                .collect(Collectors.toList());
+//    }
 }
