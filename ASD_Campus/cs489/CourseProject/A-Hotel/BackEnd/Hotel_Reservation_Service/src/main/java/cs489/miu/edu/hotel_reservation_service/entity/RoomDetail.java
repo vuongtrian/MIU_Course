@@ -22,7 +22,6 @@ public class RoomDetail {
     private String bedType;
     private Integer numberOfBeds;
     private String description;
-    @OneToMany(mappedBy = "roomDetail", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "roomDetail", fetch = FetchType.LAZY)
     private List<FileData> images = new ArrayList<>();
 }

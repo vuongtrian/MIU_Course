@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RoomDetailResponseDTO {
+    private Integer id;
     private String type;
     private BigDecimal price;
     private String bedType;
