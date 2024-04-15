@@ -7,6 +7,7 @@ import cs489.miu.edu.hotel_reservation_service.entity.dto.RoomDetailRequestDTO;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.RoomDetailResponseDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoomDetailValueMapper {
     public static RoomDetail convertToEntity (RoomDetailRequestDTO roomDetailRequestDTO) {
@@ -27,6 +28,7 @@ public class RoomDetailValueMapper {
         roomDetailResponseDTO.setBedType(roomDetail.getBedType());
         roomDetailResponseDTO.setNumberOfBeds(roomDetail.getNumberOfBeds());
         roomDetailResponseDTO.setDescription(roomDetail.getDescription());
+        roomDetailResponseDTO.setImages(roomDetail.getImages().stream().map(FileDataValueMapper::convertToDTO).collect(Collectors.toList()));
         return roomDetailResponseDTO;
     }
 

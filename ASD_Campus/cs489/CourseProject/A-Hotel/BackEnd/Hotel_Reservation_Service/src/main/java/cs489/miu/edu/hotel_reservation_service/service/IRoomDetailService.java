@@ -14,5 +14,5 @@ public interface IRoomDetailService {
     List<RoomDetailResponseDTO> getAllRoomDetails();
 
     RoomDetailResponseDTO addImages (Integer roomId, List<MultipartFile> images);
-    RoomDetailResponseDTO updateImages(Integer roomId, Integer imageId, MultipartFile image);
+    RoomDetailResponseDTO updateImages(Integer roomId, Integer imageId, MultipartFile imageFile);
 }

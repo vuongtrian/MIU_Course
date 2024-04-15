@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cs489.miu.edu.hotel_reservation_service.entity.FileData;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.FileDataRequestDTO;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.FileDataResponseDTO;
-import org.springframework.web.multipart.MultipartFile;
 
 public class FileDataValueMapper {
     public static FileData convertToEntity (FileDataRequestDTO fileDataRequestDTO) {
