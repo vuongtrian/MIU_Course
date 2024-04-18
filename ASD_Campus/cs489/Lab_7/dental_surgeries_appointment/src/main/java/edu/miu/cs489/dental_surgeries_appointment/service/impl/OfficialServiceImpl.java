@@ -6,12 +6,14 @@ import edu.miu.cs489.dental_surgeries_appointment.exception.OfficerNotFoundExcep
 import edu.miu.cs489.dental_surgeries_appointment.model.Officer;
 import edu.miu.cs489.dental_surgeries_appointment.repository.OfficerRepository;
 import edu.miu.cs489.dental_surgeries_appointment.service.OfficerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class OfficialServiceImpl implements OfficerService {
+    @Autowired
     private OfficerRepository officerRepository;
 
     @Override
@@ -55,7 +57,15 @@ public class OfficialServiceImpl implements OfficerService {
                 officerRequest.email(),
                 officerRequest.phone()
         ));
-        return null;
+        return new OfficerResponse(
+                officer.getOfficialId(),
+                officer.getUsername(),
+                officer.getRole(),
+                officer.getFirstName(),
+                officer.getLastName(),
+                officer.getEmail(),
+                officer.getPhone()
+        );
     }
 
     @Override
@@ -69,7 +79,24 @@ public class OfficialServiceImpl implements OfficerService {
 
     @Override
     public OfficerResponse update(Long officialId, OfficerRequest officerRequest) {
-
-        return null;
+        Officer officer = officerRepository.findById(officialId)
+                .orElseThrow(() -> new OfficerNotFoundException("Officer not found"));
+        officer.setUsername(officerRequest.username());
+        officer.setPassword(officerRequest.password());
+        officer.setRole(officerRequest.role());
+        officer.setFirstName(officerRequest.firstName());
+        officer.setLastName(officerRequest.lastName());
+        officer.setEmail(officerRequest.email());
+        officer.setPhone(officerRequest.phone());
+        Officer savedOfficial = officerRepository.save(officer);
+        return new OfficerResponse(
+                savedOfficial.getOfficialId(),
+                savedOfficial.getUsername(),
+                savedOfficial.getRole(),
+                savedOfficial.getFirstName(),
+                savedOfficial.getLastName(),
+                savedOfficial.getEmail(),
+                savedOfficial.getPhone()
+        );
     }
 }

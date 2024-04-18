@@ -21,4 +21,10 @@ public class Surgery {
 
     @OneToMany(mappedBy = "surgery")
     private List<Appointment> appointments;
+
+    public Surgery(String surgeryName, Address address, List<Appointment> appointments) {
+        this.surgeryName = surgeryName;
+        this.address = address;
+        this.appointments = appointments;
+    }
 }

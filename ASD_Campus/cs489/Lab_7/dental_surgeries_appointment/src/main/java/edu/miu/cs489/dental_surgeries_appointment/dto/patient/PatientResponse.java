@@ -1,8 +1,7 @@
 package edu.miu.cs489.dental_surgeries_appointment.dto.patient;
 
+import edu.miu.cs489.dental_surgeries_appointment.dto.address.AddressResponse;
 import edu.miu.cs489.dental_surgeries_appointment.dto.appointment.AppointmentResponse;
-import edu.miu.cs489.dental_surgeries_appointment.model.Address;
-import edu.miu.cs489.dental_surgeries_appointment.model.Appointment;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +13,7 @@ public record PatientResponse(
         String email,
         String phone,
         LocalDate birthDate,
-        Address address,
+        AddressResponse address,
         List<AppointmentResponse> appointments
 ) {
 }

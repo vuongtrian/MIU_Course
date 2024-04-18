@@ -6,12 +6,14 @@ import edu.miu.cs489.dental_surgeries_appointment.exception.AppointmentNotFoundE
 import edu.miu.cs489.dental_surgeries_appointment.model.Appointment;
 import edu.miu.cs489.dental_surgeries_appointment.repository.AppointmentRepository;
 import edu.miu.cs489.dental_surgeries_appointment.service.AppointmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
+    @Autowired
     private AppointmentRepository appointmentRepository;
 
     @Override

@@ -8,6 +8,7 @@ import edu.miu.cs489.dental_surgeries_appointment.model.Appointment;
 import edu.miu.cs489.dental_surgeries_appointment.model.Dentist;
 import edu.miu.cs489.dental_surgeries_appointment.repository.DentistRepository;
 import edu.miu.cs489.dental_surgeries_appointment.service.DentistService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class DentistServiceImpl implements DentistService {
+    @Autowired
     private DentistRepository dentistRepository;
 
     @Override
@@ -95,22 +97,23 @@ public class DentistServiceImpl implements DentistService {
                                 appointmentRequest.dateTime()))
                         .toList();
         dentist.setAppointments(appointments);
+        Dentist savedDentist = dentistRepository.save(dentist);
 
-        List<AppointmentResponse> appointmentResponses = dentist.getAppointments().isEmpty() ?
+        List<AppointmentResponse> appointmentResponses = savedDentist.getAppointments().isEmpty() ?
                 new ArrayList<>() :
-                dentist.getAppointments().stream()
+                savedDentist.getAppointments().stream()
                         .map(appointment -> new AppointmentResponse(
                                 appointment.getAppointmentId(),
                                 appointment.getDateTime()
                         )).toList();
 
         return new DentistResponse(
-                dentist.getDentistId(),
-                dentist.getFirstName(),
-                dentist.getLastName(),
-                dentist.getEmail(),
-                dentist.getPhoneNumber(),
-                dentist.getSpecialization(),
+                savedDentist.getDentistId(),
+                savedDentist.getFirstName(),
+                savedDentist.getLastName(),
+                savedDentist.getEmail(),
+                savedDentist.getPhoneNumber(),
+                savedDentist.getSpecialization(),
                 appointmentResponses
         );
     }

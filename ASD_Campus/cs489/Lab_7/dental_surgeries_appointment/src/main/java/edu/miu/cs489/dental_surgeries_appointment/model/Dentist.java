@@ -8,25 +8,27 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+@ToString
 @Entity
 public class Dentist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dentistId;
-    @NonNull
     private String firstName;
-    @NonNull
     private String lastName;
-    @NonNull
     private String email;
-    @NonNull
     private String phoneNumber;
-    @NonNull
     private String specialization;
 
     @OneToMany(mappedBy = "dentist")
-    @NonNull
     private List<Appointment> appointments;
 
+    public Dentist(String firstName, String lastName, String email, String phoneNumber, String specialization, List<Appointment> appointments) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.specialization = specialization;
+        this.appointments = appointments;
+    }
 }

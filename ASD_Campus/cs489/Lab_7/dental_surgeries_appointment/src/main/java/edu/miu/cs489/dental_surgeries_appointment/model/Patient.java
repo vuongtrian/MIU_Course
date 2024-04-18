@@ -1,9 +1,7 @@
 package edu.miu.cs489.dental_surgeries_appointment.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +21,16 @@ public class Patient {
     private LocalDate birthDate;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
+
+    public Patient(String firstName, String lastName, String email, String phone, LocalDate birthDate, Address address, List<Appointment> appointments) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.appointments = appointments;
+    }
 }
