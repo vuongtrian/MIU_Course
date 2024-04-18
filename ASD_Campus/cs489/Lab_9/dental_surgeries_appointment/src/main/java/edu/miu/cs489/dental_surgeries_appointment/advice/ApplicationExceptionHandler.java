@@ -35,14 +35,6 @@ public class ApplicationExceptionHandler {
         return errorMessageMap;
     }
 
-    @ExceptionHandler(OfficerNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String, String> handleOfficerNotFoundException(OfficerNotFoundException ex) {
-        Map<String, String> errorMessageMap = new HashMap<>();
-        errorMessageMap.put("message", ex.getMessage());
-        return errorMessageMap;
-    }
-
     @ExceptionHandler(PatientNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> handlePatientNotFoundException(PatientNotFoundException ex) {
