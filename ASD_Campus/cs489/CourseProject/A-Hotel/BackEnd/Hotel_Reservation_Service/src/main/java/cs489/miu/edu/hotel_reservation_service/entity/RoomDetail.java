@@ -22,7 +22,22 @@ public class RoomDetail {
     private String bedType;
     private Integer numberOfBeds;
     private String description;
+
+    @OneToMany(mappedBy = "roomDetail", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Room> rooms = new ArrayList<>();
+
     @OneToMany(mappedBy = "roomDetail", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<FileData> images = new ArrayList<>();
+
+    public RoomDetail(String type, BigDecimal price, String bedType, Integer numberOfBeds, String description, List<Room> rooms, List<FileData> images) {
+        this.type = type;
+        this.price = price;
+        this.bedType = bedType;
+        this.numberOfBeds = numberOfBeds;
+        this.description = description;
+        this.rooms = rooms;
+        this.images = images;
+    }
 }

@@ -1,8 +1,6 @@
 package cs489.miu.edu.hotel_reservation_service.controller;
 
 import cs489.miu.edu.hotel_reservation_service.entity.dto.APIResponse;
-import cs489.miu.edu.hotel_reservation_service.entity.dto.RoomDetailRequestDTO;
-import cs489.miu.edu.hotel_reservation_service.entity.dto.RoomDetailResponseDTO;
 import cs489.miu.edu.hotel_reservation_service.service.IRoomDetailService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,7 @@ public class RoomDetailController {
     public static final String SUCCESS = "Success";
 
     private IRoomDetailService roomDetailService;
-
+/*
     @PostMapping
     public ResponseEntity<APIResponse> createRoomDetail(@RequestBody @Valid RoomDetailRequestDTO roomDetailRequestDTO) {
         RoomDetailResponseDTO roomDetailResponseDTO = roomDetailService.createRoomDetail(roomDetailRequestDTO);
@@ -68,4 +66,6 @@ public class RoomDetailController {
         roomDetailService.deleteRoomDetail(roomDetailId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+ */
 }

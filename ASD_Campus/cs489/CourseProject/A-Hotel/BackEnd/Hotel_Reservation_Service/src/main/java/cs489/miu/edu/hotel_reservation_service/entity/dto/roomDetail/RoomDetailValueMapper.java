@@ -3,10 +3,17 @@ package cs489.miu.edu.hotel_reservation_service.entity.dto.roomDetail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cs489.miu.edu.hotel_reservation_service.entity.RoomDetail;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileRequest;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileValueMapper;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.room.RoomValueMapper;
+import cs489.miu.edu.hotel_reservation_service.util.ImageHandler;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class RoomDetailValueMapper {
+
     public static RoomDetail convertToEntity(RoomDetailRequest roomDetailRequest) {
         return new RoomDetail(
                 roomDetailRequest.type(),
@@ -14,13 +21,18 @@ public class RoomDetailValueMapper {
                 roomDetailRequest.bedType(),
                 roomDetailRequest.numberOfBeds(),
                 roomDetailRequest.description(),
-                roomDetailRequest.rooms().stream().map(
-                        RoomValueMapper::convertToEntity
-                ).toList(),
-                roomDetailRequest.images().stream().map(
-                        FileValueMapper::convertToEntity
-                ).toList()
+                roomDetailRequest.rooms().isEmpty() ?
+                        new ArrayList<>() :
+                        roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList(),
+                roomDetailRequest.images().isEmpty() ?
+                        Collections.emptyList() :
+                        roomDetailRequest.images().stream().map(multipartFile -> {
+                            FileRequest fileRequest = ImageHandler.uploadImage(multipartFile);
+                            return FileValueMapper.convertToEntity(fileRequest);
+                        }).toList()
+
         );
+
     }
 
     public static RoomDetailResponse convertToDto(RoomDetail roomDetail) {
@@ -31,12 +43,12 @@ public class RoomDetailValueMapper {
                 roomDetail.getBedType(),
                 roomDetail.getNumberOfBeds(),
                 roomDetail.getDescription(),
-                roomDetail.getRooms().stream().map(
-                        RoomValueMapper::convertToDto
-                ).toList(),
-                roomDetail.getImages().stream().map(
-                        FileValueMapper::convertToDto
-                ).toList()
+                roomDetail.getRooms().isEmpty() ?
+                        new ArrayList<>() :
+                        roomDetail.getRooms().stream().map(RoomValueMapper::convertToDto).toList(),
+                roomDetail.getImages().isEmpty() ?
+                        new ArrayList<>() :
+                        roomDetail.getImages().stream().map(FileValueMapper::convertToDto).toList()
         );
     }
 

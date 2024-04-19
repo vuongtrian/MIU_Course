@@ -1,39 +1,34 @@
-package cs489.miu.edu.hotel_reservation_service.Util;
+package cs489.miu.edu.hotel_reservation_service.util;
 
-import cs489.miu.edu.hotel_reservation_service.configuration.ImageConfig;
-import cs489.miu.edu.hotel_reservation_service.entity.dto.FileDataRequestDTO;
-import org.springframework.stereotype.Service;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileRequest;
+import cs489.miu.edu.hotel_reservation_service.exception.FileDataServiceException;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.IOException;
 import java.util.UUID;
 
-@Service
 public class ImageHandler {
-    private ImageConfig imageConfig;
+    public static String IMAGE_PATH = "src/main/resources/static/images";
 
-    public FileDataRequestDTO uploadImage (MultipartFile image){
-        FileDataRequestDTO imageRequestDTO = new FileDataRequestDTO();
+    public static FileRequest uploadImage (MultipartFile image) {
         try {
             String fileName =  UUID.randomUUID() + "_" + image.getOriginalFilename();
-            String filePath = imageConfig +fileName;
-            imageRequestDTO.setType(image.getContentType());
-            imageRequestDTO.setName(fileName);
-            imageRequestDTO.setPath(filePath);
+            String filePath = IMAGE_PATH + "/" +fileName;
             image.transferTo(new File(filePath));
-            return imageRequestDTO;
+            return new FileRequest(image.getContentType(), fileName, filePath);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to store image to local repo", e);
+            throw new FileDataServiceException("Failed to store image to local repo");
         }
     }
 
-    public void deleteImage (String imagePath){
+    public static void deleteImage (String imagePath){
         try {
             String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
-            Path filePath = Paths.get(imageConfig.getAbsoluteImageUploadPath(), fileName);
+            Path filePath = Paths.get(IMAGE_PATH, fileName);
             Files.deleteIfExists(filePath);
         }catch (IOException e) {
             throw new RuntimeException("Failed to delete image out of local repo", e);

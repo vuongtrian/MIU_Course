@@ -26,4 +26,11 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
+
+    public Reservation(LocalDate startDate, LocalDate endDate, BigDecimal totalPrice, Integer numberOfGuest) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.totalPrice = totalPrice;
+        this.numberOfGuest = numberOfGuest;
+    }
 }

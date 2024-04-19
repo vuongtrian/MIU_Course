@@ -16,8 +16,14 @@ import java.util.List;
 public class Room {
     @Id
     private Integer roomNumber;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "room_detail_id")
     private RoomDetail roomDetail;
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<Reservation> reservations = new ArrayList<>();
+
+    public Room(Integer roomNumber, List<Reservation> reservations) {
+        this.roomNumber = roomNumber;
+        this.reservations = reservations;
+    }
 }

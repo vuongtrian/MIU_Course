@@ -17,6 +17,12 @@ public class FileData {
     private String name;
     private String path;
     @ManyToOne
-    @JoinColumn(name = "roomDetail_id")
+    @JoinColumn(name = "room_detail_id")
     private RoomDetail roomDetail;
+
+    public FileData(String type, String name, String path) {
+        this.type = type;
+        this.name = name;
+        this.path = path;
+    }
 }
