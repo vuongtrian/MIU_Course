@@ -1,4 +1,4 @@
-package cs489.miu.edu.hotel_reservation_service.entity.dto.record.file;
+package cs489.miu.edu.hotel_reservation_service.entity.dto.file;
 
 public record FileResponse(
         Integer id,
