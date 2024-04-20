@@ -7,10 +7,12 @@ import cs489.miu.edu.hotel_reservation_service.exception.FileDataNotFoundExcepti
 import cs489.miu.edu.hotel_reservation_service.exception.FileDataServiceException;
 import cs489.miu.edu.hotel_reservation_service.repository.IFileDataRepository;
 import cs489.miu.edu.hotel_reservation_service.service.IImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ImageService implements IImageService {
+    @Autowired
     private IFileDataRepository fileDataRepository;
 
     @Override

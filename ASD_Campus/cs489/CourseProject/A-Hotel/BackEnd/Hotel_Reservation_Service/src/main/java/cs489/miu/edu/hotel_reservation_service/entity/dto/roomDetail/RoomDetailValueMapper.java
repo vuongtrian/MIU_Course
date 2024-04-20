@@ -21,10 +21,10 @@ public class RoomDetailValueMapper {
                 roomDetailRequest.bedType(),
                 roomDetailRequest.numberOfBeds(),
                 roomDetailRequest.description(),
-                roomDetailRequest.rooms().isEmpty() ?
+                roomDetailRequest.rooms() == null ?
                         new ArrayList<>() :
                         roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList(),
-                roomDetailRequest.images().isEmpty() ?
+                roomDetailRequest.images() == null ?
                         Collections.emptyList() :
                         roomDetailRequest.images().stream().map(multipartFile -> {
                             FileRequest fileRequest = ImageHandler.uploadImage(multipartFile);

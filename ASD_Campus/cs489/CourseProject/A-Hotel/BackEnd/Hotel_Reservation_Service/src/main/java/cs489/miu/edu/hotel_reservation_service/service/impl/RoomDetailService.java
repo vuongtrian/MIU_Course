@@ -10,6 +10,7 @@ import cs489.miu.edu.hotel_reservation_service.exception.RoomDetailServiceExcept
 import cs489.miu.edu.hotel_reservation_service.repository.IRoomDetailRepository;
 import cs489.miu.edu.hotel_reservation_service.service.IRoomDetailService;
 import cs489.miu.edu.hotel_reservation_service.util.ImageHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -18,6 +19,7 @@ import java.util.List;
 @Service
 public class RoomDetailService implements IRoomDetailService {
 
+    @Autowired
     private IRoomDetailRepository roomDetailRepository;
 
     @Override
@@ -31,10 +33,10 @@ public class RoomDetailService implements IRoomDetailService {
     }
 
     @Override
-    public RoomDetailResponse updateRoomDetail(Integer roomId, RoomDetailRequest roomDetailRequest) {
+    public RoomDetailResponse updateRoomDetail(Integer roomDetailId, RoomDetailRequest roomDetailRequest) {
         try {
-            RoomDetail roomDetail = roomDetailRepository.findById(roomId)
-                    .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomId));
+            RoomDetail roomDetail = roomDetailRepository.findById(roomDetailId)
+                    .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomDetailId));
             roomDetail.setType(roomDetailRequest.type());
             roomDetail.setPrice(roomDetailRequest.price());
             roomDetail.setBedType(roomDetailRequest.bedType());
@@ -43,30 +45,30 @@ public class RoomDetailService implements IRoomDetailService {
             roomDetail.setRooms(roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList());
             return RoomDetailValueMapper.convertToDto(roomDetailRepository.save(roomDetail));
         } catch (Exception e) {
-            throw new RoomDetailServiceException("Exception occurred while update room detail id " + roomId);
+            throw new RoomDetailServiceException("Exception occurred while update room detail id " + roomDetailId);
         }
     }
 
     @Override
-    public void deleteRoomDetailById(Integer roomId) {
+    public void deleteRoomDetailById(Integer roomDetailId) {
         try {
-            RoomDetail roomDetail = roomDetailRepository.findById(roomId)
-                    .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomId));
+            RoomDetail roomDetail = roomDetailRepository.findById(roomDetailId)
+                    .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomDetailId));
             roomDetail.getImages().forEach(image -> ImageHandler.deleteImage(image.getPath()));
             roomDetailRepository.delete(roomDetail);
         } catch (Exception e) {
-            throw new RoomDetailServiceException("Exception occurred while delete room detail id " + roomId);
+            throw new RoomDetailServiceException("Exception occurred while delete room detail id " + roomDetailId);
         }
     }
 
     @Override
-    public RoomDetailResponse getRoomDetailById(Integer roomId) {
+    public RoomDetailResponse getRoomDetailById(Integer roomDetailId) {
         try {
-            RoomDetail roomDetail = roomDetailRepository.findById(roomId)
-                    .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomId));
+            RoomDetail roomDetail = roomDetailRepository.findById(roomDetailId)
+                    .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomDetailId));
             return RoomDetailValueMapper.convertToDto(roomDetail);
         } catch (Exception e) {
-            throw new RoomDetailServiceException("Exception occurred while get room detail id " + roomId);
+            throw new RoomDetailServiceException("Exception occurred while get room detail id " + roomDetailId);
         }
     }
 

@@ -1,8 +1,11 @@
 package cs489.miu.edu.hotel_reservation_service.controller;
 
 import cs489.miu.edu.hotel_reservation_service.entity.dto.APIResponse;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.roomDetail.RoomDetailRequest;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.roomDetail.RoomDetailResponse;
 import cs489.miu.edu.hotel_reservation_service.service.IRoomDetailService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +17,15 @@ import java.util.List;
 public class RoomDetailController {
     public static final String SUCCESS = "Success";
 
+    @Autowired
     private IRoomDetailService roomDetailService;
-/*
-    @PostMapping
-    public ResponseEntity<APIResponse> createRoomDetail(@RequestBody @Valid RoomDetailRequestDTO roomDetailRequestDTO) {
-        RoomDetailResponseDTO roomDetailResponseDTO = roomDetailService.createRoomDetail(roomDetailRequestDTO);
 
-        APIResponse<RoomDetailResponseDTO> responseDTO = APIResponse
-                .<RoomDetailResponseDTO>builder()
+    @PostMapping
+    public ResponseEntity<APIResponse> createRoomDetail(@RequestBody @Valid RoomDetailRequest roomDetailRequestDTO) {
+        RoomDetailResponse roomDetailResponseDTO = roomDetailService.createRoomDetail(roomDetailRequestDTO);
+
+        APIResponse<RoomDetailResponse> responseDTO = APIResponse
+                .<RoomDetailResponse>builder()
                 .status(SUCCESS)
                 .results(roomDetailResponseDTO)
                 .build();
@@ -29,10 +33,10 @@ public class RoomDetailController {
     }
 
     @PutMapping("/{roomDetailId}")
-    public ResponseEntity<APIResponse> updateRoomDetail (@PathVariable int roomDetailId, @RequestBody @Valid RoomDetailRequestDTO roomDetailRequestDTO) {
-        RoomDetailResponseDTO roomDetailResponseDTO = roomDetailService.updateRoomDetail(roomDetailId, roomDetailRequestDTO);
-        APIResponse<RoomDetailResponseDTO> responseDTO = APIResponse
-                .<RoomDetailResponseDTO>builder()
+    public ResponseEntity<APIResponse> updateRoomDetail (@PathVariable int roomDetailId, @RequestBody @Valid RoomDetailRequest roomDetailRequestDTO) {
+        RoomDetailResponse roomDetailResponseDTO = roomDetailService.updateRoomDetail(roomDetailId, roomDetailRequestDTO);
+        APIResponse<RoomDetailResponse> responseDTO = APIResponse
+                .<RoomDetailResponse>builder()
                 .status(SUCCESS)
                 .results(roomDetailResponseDTO)
                 .build();
@@ -41,9 +45,9 @@ public class RoomDetailController {
 
     @GetMapping
     public ResponseEntity<APIResponse> getAllRoomDetail () {
-        List<RoomDetailResponseDTO> roomDetailResponseDTOList = roomDetailService.getAllRoomDetails();
-        APIResponse<List<RoomDetailResponseDTO>> responseDTO = APIResponse
-                .<List<RoomDetailResponseDTO>>builder()
+        List<RoomDetailResponse> roomDetailResponseDTOList = roomDetailService.getAllRoomDetails();
+        APIResponse<List<RoomDetailResponse>> responseDTO = APIResponse
+                .<List<RoomDetailResponse>>builder()
                 .status(SUCCESS)
                 .results(roomDetailResponseDTOList)
                 .build();
@@ -52,9 +56,9 @@ public class RoomDetailController {
 
     @GetMapping("/{roomDetailId}")
     public ResponseEntity<APIResponse> getRoomDetail (@PathVariable int roomDetailId) {
-        RoomDetailResponseDTO roomDetailResponseDTO = roomDetailService.getRoomDetailById(roomDetailId);
-        APIResponse<RoomDetailResponseDTO> responseDTO = APIResponse
-                .<RoomDetailResponseDTO>builder()
+        RoomDetailResponse roomDetailResponseDTO = roomDetailService.getRoomDetailById(roomDetailId);
+        APIResponse<RoomDetailResponse> responseDTO = APIResponse
+                .<RoomDetailResponse>builder()
                 .status(SUCCESS)
                 .results(roomDetailResponseDTO)
                 .build();
@@ -63,9 +67,9 @@ public class RoomDetailController {
 
     @DeleteMapping("/{roomDetailId}")
     public ResponseEntity<APIResponse> deleteRoomDetail (@PathVariable int roomDetailId) {
-        roomDetailService.deleteRoomDetail(roomDetailId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        roomDetailService.deleteRoomDetailById(roomDetailId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
- */
+
 }
