@@ -24,12 +24,15 @@ public class RoomDetailValueMapper {
                 roomDetailRequest.rooms() == null ?
                         new ArrayList<>() :
                         roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList(),
+//                roomDetailRequest.images() == null ?
+//                        Collections.emptyList() :
+//                        roomDetailRequest.images().stream().map(multipartFile -> {
+//                            FileRequest fileRequest = ImageHandler.uploadImage(multipartFile);
+//                            return FileValueMapper.convertToEntity(fileRequest);
+//                        }).toList()
                 roomDetailRequest.images() == null ?
-                        Collections.emptyList() :
-                        roomDetailRequest.images().stream().map(multipartFile -> {
-                            FileRequest fileRequest = ImageHandler.uploadImage(multipartFile);
-                            return FileValueMapper.convertToEntity(fileRequest);
-                        }).toList()
+                        new ArrayList<>() :
+                        roomDetailRequest.images().stream().map(FileValueMapper::convertToEntity).toList()
 
         );
 

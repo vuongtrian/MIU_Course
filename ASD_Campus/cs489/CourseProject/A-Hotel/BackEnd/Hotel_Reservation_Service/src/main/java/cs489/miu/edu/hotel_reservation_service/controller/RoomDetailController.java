@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class RoomDetailController {
     private IRoomDetailService roomDetailService;
 
     @PostMapping
-    public ResponseEntity<APIResponse> createRoomDetail(@RequestBody @Valid RoomDetailRequest roomDetailRequestDTO) {
-        RoomDetailResponse roomDetailResponseDTO = roomDetailService.createRoomDetail(roomDetailRequestDTO);
+    public ResponseEntity<APIResponse> createRoomDetail(@RequestPart @Valid RoomDetailRequest roomDetailRequestDTO, @RequestPart List<MultipartFile> images) {
+        RoomDetailResponse roomDetailResponseDTO = roomDetailService.createRoomDetail(roomDetailRequestDTO, images);
 
         APIResponse<RoomDetailResponse> responseDTO = APIResponse
                 .<RoomDetailResponse>builder()

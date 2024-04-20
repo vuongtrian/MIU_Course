@@ -12,8 +12,10 @@ import cs489.miu.edu.hotel_reservation_service.service.IRoomDetailService;
 import cs489.miu.edu.hotel_reservation_service.util.ImageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,9 +25,21 @@ public class RoomDetailService implements IRoomDetailService {
     private IRoomDetailRepository roomDetailRepository;
 
     @Override
-    public RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest) {
+    public RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest, List<MultipartFile> images) {
         try {
-            RoomDetail roomDetail = RoomDetailValueMapper.convertToEntity(roomDetailRequest);
+            RoomDetailRequest updatedRoomDetailRequest = new RoomDetailRequest(
+                    roomDetailRequest.type(),
+                    roomDetailRequest.price(),
+                    roomDetailRequest.bedType(),
+                    roomDetailRequest.numberOfBeds(),
+                    roomDetailRequest.description(),
+                    roomDetailRequest.rooms(),
+                    images == null ? new ArrayList<>()
+                            : images.stream().map(ImageHandler::uploadImage).toList()
+            );
+
+
+            RoomDetail roomDetail = RoomDetailValueMapper.convertToEntity(updatedRoomDetailRequest);
             return RoomDetailValueMapper.convertToDto(roomDetailRepository.save(roomDetail));
         } catch (Exception e) {
             throw new RoomDetailServiceException("Exception occurred while create a new room detail");
