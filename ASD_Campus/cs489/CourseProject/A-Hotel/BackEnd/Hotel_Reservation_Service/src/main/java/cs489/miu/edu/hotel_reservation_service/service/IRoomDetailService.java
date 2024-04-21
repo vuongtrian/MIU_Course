@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface IRoomDetailService {
-    RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest, List<MultipartFile> images);
+//    RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest, List<MultipartFile> images);
+//    RoomDetailResponse updateRoomDetail(Integer roomId,RoomDetailRequest roomDetailRequest, List<MultipartFile> images);
+    RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest);
     RoomDetailResponse updateRoomDetail(Integer roomId,RoomDetailRequest roomDetailRequest);
     void deleteRoomDetailById(Integer roomDetailId);
     RoomDetailResponse getRoomDetailById(Integer roomDetailId);

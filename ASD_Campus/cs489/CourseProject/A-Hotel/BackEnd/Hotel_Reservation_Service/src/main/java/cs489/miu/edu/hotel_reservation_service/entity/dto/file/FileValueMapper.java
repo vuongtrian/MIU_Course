@@ -3,13 +3,15 @@ package cs489.miu.edu.hotel_reservation_service.entity.dto.file;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cs489.miu.edu.hotel_reservation_service.entity.FileData;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.roomDetail.RoomDetailValueMapper;
 
 public class FileValueMapper {
     public static FileData convertToEntity (FileRequest fileRequest) {
         return new FileData(
                 fileRequest.type(),
                 fileRequest.name(),
-                fileRequest.path()
+                fileRequest.path(),
+                RoomDetailValueMapper.convertToEntity(fileRequest.roomDetailRequest())
         );
     }
 
@@ -18,7 +20,8 @@ public class FileValueMapper {
                 fileData.getId(),
                 fileData.getType(),
                 fileData.getName(),
-                fileData.getPath()
+                fileData.getPath(),
+                RoomDetailValueMapper.convertToDto(fileData.getRoomDetail())
         );
     }
 

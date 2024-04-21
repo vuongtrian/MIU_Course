@@ -20,19 +20,13 @@ public class RoomDetailValueMapper {
                 roomDetailRequest.price(),
                 roomDetailRequest.bedType(),
                 roomDetailRequest.numberOfBeds(),
-                roomDetailRequest.description(),
-                roomDetailRequest.rooms() == null ?
-                        new ArrayList<>() :
-                        roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList(),
+                roomDetailRequest.description()
+//                roomDetailRequest.rooms() == null || roomDetailRequest.rooms().isEmpty() ?
+//                        new ArrayList<>() :
+//                        roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList(),
 //                roomDetailRequest.images() == null ?
-//                        Collections.emptyList() :
-//                        roomDetailRequest.images().stream().map(multipartFile -> {
-//                            FileRequest fileRequest = ImageHandler.uploadImage(multipartFile);
-//                            return FileValueMapper.convertToEntity(fileRequest);
-//                        }).toList()
-                roomDetailRequest.images() == null ?
-                        new ArrayList<>() :
-                        roomDetailRequest.images().stream().map(FileValueMapper::convertToEntity).toList()
+//                        new ArrayList<>() :
+//                        roomDetailRequest.images().stream().map(FileValueMapper::convertToEntity).toList()
 
         );
 
@@ -45,13 +39,13 @@ public class RoomDetailValueMapper {
                 roomDetail.getPrice(),
                 roomDetail.getBedType(),
                 roomDetail.getNumberOfBeds(),
-                roomDetail.getDescription(),
-                roomDetail.getRooms().isEmpty() ?
-                        new ArrayList<>() :
-                        roomDetail.getRooms().stream().map(RoomValueMapper::convertToDto).toList(),
-                roomDetail.getImages().isEmpty() ?
-                        new ArrayList<>() :
-                        roomDetail.getImages().stream().map(FileValueMapper::convertToDto).toList()
+                roomDetail.getDescription()
+//                roomDetail.getRooms().isEmpty() ?
+//                        new ArrayList<>() :
+//                        roomDetail.getRooms().stream().map(RoomValueMapper::convertToDto).toList(),
+//                roomDetail.getImages().isEmpty() ?
+//                        new ArrayList<>() :
+//                        roomDetail.getImages().stream().map(FileValueMapper::convertToDto).toList()
         );
     }
 

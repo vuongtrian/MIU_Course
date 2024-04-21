@@ -16,13 +16,14 @@ public class FileData {
     private String type;
     private String name;
     private String path;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_detail_id")
     private RoomDetail roomDetail;
 
-    public FileData(String type, String name, String path) {
+    public FileData(String type, String name, String path, RoomDetail roomDetail) {
         this.type = type;
         this.name = name;
         this.path = path;
+        this.roomDetail = roomDetail;
     }
 }

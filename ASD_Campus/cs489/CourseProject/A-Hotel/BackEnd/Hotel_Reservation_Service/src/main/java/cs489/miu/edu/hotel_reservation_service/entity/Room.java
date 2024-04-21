@@ -16,7 +16,7 @@ import java.util.List;
 public class Room {
     @Id
     private Integer roomNumber;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_detail_id")
     private RoomDetail roomDetail;
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)

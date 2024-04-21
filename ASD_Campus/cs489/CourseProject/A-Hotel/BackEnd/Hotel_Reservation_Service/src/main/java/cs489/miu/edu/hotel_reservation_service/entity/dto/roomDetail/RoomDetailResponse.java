@@ -12,8 +12,8 @@ public record RoomDetailResponse(
         BigDecimal price,
         String bedType,
         Integer numberOfBeds,
-        String description,
-        List<RoomResponse> rooms,
-        List<FileResponse> images
+        String description
+//        List<RoomResponse> rooms,
+//        List<FileResponse> images
 ) {
 }

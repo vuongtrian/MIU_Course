@@ -1,5 +1,8 @@
 package cs489.miu.edu.hotel_reservation_service.service.impl;
 
+import cs489.miu.edu.hotel_reservation_service.entity.FileData;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileRequest;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileValueMapper;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.room.RoomValueMapper;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.roomDetail.RoomDetailRequest;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.roomDetail.RoomDetailResponse;
@@ -25,19 +28,18 @@ public class RoomDetailService implements IRoomDetailService {
     private IRoomDetailRepository roomDetailRepository;
 
     @Override
-    public RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest, List<MultipartFile> images) {
+    public RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest) {
         try {
             RoomDetailRequest updatedRoomDetailRequest = new RoomDetailRequest(
                     roomDetailRequest.type(),
                     roomDetailRequest.price(),
                     roomDetailRequest.bedType(),
                     roomDetailRequest.numberOfBeds(),
-                    roomDetailRequest.description(),
-                    roomDetailRequest.rooms(),
-                    images == null ? new ArrayList<>()
-                            : images.stream().map(ImageHandler::uploadImage).toList()
+                    roomDetailRequest.description()
+//                    roomDetailRequest.rooms(),
+//                    images == null  ? new ArrayList<>()
+//                            : images.stream().map(ImageHandler::uploadImage).toList()
             );
-
 
             RoomDetail roomDetail = RoomDetailValueMapper.convertToEntity(updatedRoomDetailRequest);
             return RoomDetailValueMapper.convertToDto(roomDetailRepository.save(roomDetail));
@@ -56,8 +58,15 @@ public class RoomDetailService implements IRoomDetailService {
             roomDetail.setBedType(roomDetailRequest.bedType());
             roomDetail.setNumberOfBeds(roomDetailRequest.numberOfBeds());
             roomDetail.setDescription(roomDetailRequest.description());
-            roomDetail.setRooms(roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList());
-            return RoomDetailValueMapper.convertToDto(roomDetailRepository.save(roomDetail));
+//            roomDetail.setRooms(roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList());
+//
+//            if(images != null) {
+//                roomDetail.getImages().forEach(image -> ImageHandler.deleteImage(image.getPath()));
+//                List<FileRequest> fileRequests = images.stream().map(ImageHandler::uploadImage).toList();
+//                roomDetail.setImages(fileRequests.stream().map(FileValueMapper::convertToEntity).toList());
+//            }
+            RoomDetail updatedRoomDetail = roomDetailRepository.save(roomDetail);
+            return RoomDetailValueMapper.convertToDto(roomDetailRepository.save(updatedRoomDetail));
         } catch (Exception e) {
             throw new RoomDetailServiceException("Exception occurred while update room detail id " + roomDetailId);
         }
@@ -68,7 +77,7 @@ public class RoomDetailService implements IRoomDetailService {
         try {
             RoomDetail roomDetail = roomDetailRepository.findById(roomDetailId)
                     .orElseThrow(() -> new RoomDetailNotFoundException("Room detail not found with id " + roomDetailId));
-            roomDetail.getImages().forEach(image -> ImageHandler.deleteImage(image.getPath()));
+//            roomDetail.getImages().forEach(image -> ImageHandler.deleteImage(image.getPath()));
             roomDetailRepository.delete(roomDetail);
         } catch (Exception e) {
             throw new RoomDetailServiceException("Exception occurred while delete room detail id " + roomDetailId);

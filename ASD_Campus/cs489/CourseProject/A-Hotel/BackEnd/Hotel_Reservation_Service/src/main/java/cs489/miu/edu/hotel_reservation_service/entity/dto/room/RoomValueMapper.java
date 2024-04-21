@@ -11,7 +11,7 @@ public class RoomValueMapper {
     public static Room convertToEntity(RoomRequest roomRequest) {
         return new Room(
                 roomRequest.roomNumber(),
-                roomRequest.reservations().isEmpty() ?
+                roomRequest.reservations() == null ?
                         new ArrayList<>() :
                         roomRequest.reservations().stream().map(ReservationValueMapper::convertToEntity).toList()
         );

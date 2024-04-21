@@ -22,48 +22,53 @@ public class RoomDetailController {
     private IRoomDetailService roomDetailService;
 
     @PostMapping
-    public ResponseEntity<APIResponse> createRoomDetail(@RequestPart @Valid RoomDetailRequest roomDetailRequestDTO, @RequestPart List<MultipartFile> images) {
-        RoomDetailResponse roomDetailResponseDTO = roomDetailService.createRoomDetail(roomDetailRequestDTO, images);
-
+    public ResponseEntity<APIResponse> createRoomDetail(@RequestBody @Valid RoomDetailRequest roomDetailRequest) {
+                                                        //@RequestPart(name = "images", required = false) List<MultipartFile> images) {
+//        RoomDetailResponse roomDetailResponse = roomDetailService.createRoomDetail(roomDetailRequest, images);
+        RoomDetailResponse roomDetailResponse = roomDetailService.createRoomDetail(roomDetailRequest);
         APIResponse<RoomDetailResponse> responseDTO = APIResponse
                 .<RoomDetailResponse>builder()
                 .status(SUCCESS)
-                .results(roomDetailResponseDTO)
+                .results(roomDetailResponse)
                 .build();
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("/{roomDetailId}")
-    public ResponseEntity<APIResponse> updateRoomDetail (@PathVariable int roomDetailId, @RequestBody @Valid RoomDetailRequest roomDetailRequestDTO) {
-        RoomDetailResponse roomDetailResponseDTO = roomDetailService.updateRoomDetail(roomDetailId, roomDetailRequestDTO);
-        APIResponse<RoomDetailResponse> responseDTO = APIResponse
+//    public ResponseEntity<APIResponse> updateRoomDetail (@PathVariable int roomDetailId,
+//                                                         @RequestPart @Valid RoomDetailRequest roomDetailRequest,
+//                                                         @RequestPart List<MultipartFile> images) {
+    public ResponseEntity<APIResponse> updateRoomDetail (@PathVariable int roomDetailId,
+                                                         @RequestBody @Valid RoomDetailRequest roomDetailRequest) {
+        RoomDetailResponse roomDetailResponse = roomDetailService.updateRoomDetail(roomDetailId, roomDetailRequest);
+        APIResponse<RoomDetailResponse> response = APIResponse
                 .<RoomDetailResponse>builder()
                 .status(SUCCESS)
-                .results(roomDetailResponseDTO)
+                .results(roomDetailResponse)
                 .build();
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<APIResponse> getAllRoomDetail () {
-        List<RoomDetailResponse> roomDetailResponseDTOList = roomDetailService.getAllRoomDetails();
-        APIResponse<List<RoomDetailResponse>> responseDTO = APIResponse
+        List<RoomDetailResponse> roomDetailResponseList = roomDetailService.getAllRoomDetails();
+        APIResponse<List<RoomDetailResponse>> response = APIResponse
                 .<List<RoomDetailResponse>>builder()
                 .status(SUCCESS)
-                .results(roomDetailResponseDTOList)
+                .results(roomDetailResponseList)
                 .build();
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{roomDetailId}")
     public ResponseEntity<APIResponse> getRoomDetail (@PathVariable int roomDetailId) {
-        RoomDetailResponse roomDetailResponseDTO = roomDetailService.getRoomDetailById(roomDetailId);
-        APIResponse<RoomDetailResponse> responseDTO = APIResponse
+        RoomDetailResponse roomDetailResponse = roomDetailService.getRoomDetailById(roomDetailId);
+        APIResponse<RoomDetailResponse> response = APIResponse
                 .<RoomDetailResponse>builder()
                 .status(SUCCESS)
-                .results(roomDetailResponseDTO)
+                .results(roomDetailResponse)
                 .build();
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{roomDetailId}")

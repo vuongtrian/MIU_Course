@@ -11,8 +11,8 @@ public record RoomDetailRequest(
         BigDecimal price,
         String bedType,
         Integer numberOfBeds,
-        String description,
-        List<RoomRequest> rooms,
-        List<FileRequest> images
+        String description
+//        List<RoomRequest> rooms,
+//        List<FileRequest> images
 ) {
 }

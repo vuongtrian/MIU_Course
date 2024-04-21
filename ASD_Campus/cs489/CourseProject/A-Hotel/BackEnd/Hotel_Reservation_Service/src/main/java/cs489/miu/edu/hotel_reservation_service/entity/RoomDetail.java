@@ -25,19 +25,17 @@ public class RoomDetail {
 
     @OneToMany(mappedBy = "roomDetail", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private List<Room> rooms = new ArrayList<>();
+    private List<Room> rooms;
 
     @OneToMany(mappedBy = "roomDetail", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private List<FileData> images = new ArrayList<>();
+    private List<FileData> images;
 
-    public RoomDetail(String type, BigDecimal price, String bedType, Integer numberOfBeds, String description, List<Room> rooms, List<FileData> images) {
+    public RoomDetail(String type, BigDecimal price, String bedType, Integer numberOfBeds, String description) {
         this.type = type;
         this.price = price;
         this.bedType = bedType;
         this.numberOfBeds = numberOfBeds;
         this.description = description;
-        this.rooms = rooms;
-        this.images = images;
     }
 }
