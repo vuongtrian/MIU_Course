@@ -16,7 +16,7 @@ public class FileData {
     private String type;
     private String name;
     private String path;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "room_detail_id")
     private RoomDetail roomDetail;
 

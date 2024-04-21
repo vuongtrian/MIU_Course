@@ -5,6 +5,7 @@ import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileResponse;
 import cs489.miu.edu.hotel_reservation_service.service.IImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,14 +43,11 @@ public class ImageController {
     }
 
     @GetMapping("/{imageId}")
-    public ResponseEntity<APIResponse> getAllImages(@PathVariable int imageId) {
-        FileResponse fileResponse = imageService.getImageById(imageId);
-        APIResponse<FileResponse> response = APIResponse
-                .<FileResponse>builder()
-                .status(SUCCESS)
-                .results(fileResponse)
-                .build();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<?> getImageById(@PathVariable int imageId) {
+        byte[] imageResponse = imageService.getImageById(imageId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf("image/png"))
+                .body(imageResponse);
     }
 
     @DeleteMapping("/{imageId}")

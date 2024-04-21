@@ -62,7 +62,7 @@ public class ImageService implements IImageService {
             Files.deleteIfExists(filePath);
 
             String newFileName =  UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
-            Path newPath = Paths.get(getImageDirectory(), fileName);
+            Path newPath = Paths.get(getImageDirectory(), newFileName);
             imageFile.transferTo(new File(newPath.toFile().getAbsolutePath()));
 
             image.setType(imageFile.getContentType());
@@ -86,18 +86,21 @@ public class ImageService implements IImageService {
             Path filePath = Paths.get(getImageDirectory(), fileName);
             Files.deleteIfExists(filePath);
 
-            fileDataRepository.delete(image);
+            fileDataRepository.deleteById(imageId);
         } catch (Exception e) {
             throw new FileDataServiceException("Exception occurred while delete image id " + imageId);
         }
     }
 
     @Override
-    public FileResponse getImageById(Integer id) {
+    public byte[] getImageById(Integer id) {
         try {
             FileData image = fileDataRepository.findById(id)
                     .orElseThrow(() -> new FileDataNotFoundException("Image not found with id " + id));
-            return FileValueMapper.convertToDto(image);
+            String imagePath = image.getPath();
+            String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+            Path filePath = Paths.get(getImageDirectory(), fileName);
+            return Files.readAllBytes(filePath);
         } catch (Exception e) {
             throw new FileDataServiceException("Exception occurred while fetch image id " + id + " from database");
         }

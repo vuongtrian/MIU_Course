@@ -8,5 +8,5 @@ public interface IImageService {
     FileResponse createImage(Integer roomDetailId, MultipartFile imageFile);
     FileResponse updateImage(Integer imageId, MultipartFile imageFile);
     void deleteImageById(Integer imageId);
-    FileResponse getImageById(Integer id);
+    byte[] getImageById(Integer id);
 }
