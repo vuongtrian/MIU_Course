@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reservation")
+@RequestMapping("/api/v1/reservations")
 public class ReservationController {
     public static final String SUCCESS = "Success";
 
@@ -21,8 +21,9 @@ public class ReservationController {
     private IReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<APIResponse> createReservation(@RequestBody @Valid ReservationRequest reservationRequest) {
-        ReservationResponse reservationResponse = reservationService.createReservation(reservationRequest);
+    public ResponseEntity<APIResponse> createReservation(@RequestBody @Valid ReservationRequest reservationRequest,
+                                                         @RequestParam int roomNumber) {
+        ReservationResponse reservationResponse = reservationService.createReservation(roomNumber, reservationRequest);
         APIResponse<ReservationResponse> responseDTO = APIResponse
                 .<ReservationResponse>builder()
                 .status(SUCCESS)
@@ -32,8 +33,10 @@ public class ReservationController {
     }
 
     @PutMapping("/{reservationId}")
-    public ResponseEntity<APIResponse> updateReservation (@PathVariable int reservationId, @RequestBody @Valid ReservationRequest reservationRequest) {
-        ReservationResponse reservationResponse = reservationService.updateReservation(reservationId, reservationRequest);
+    public ResponseEntity<APIResponse> updateReservation (@PathVariable int reservationId,
+                                                          @RequestBody @Valid ReservationRequest reservationRequest,
+                                                          @RequestParam int roomNumber) {
+        ReservationResponse reservationResponse = reservationService.updateReservation(roomNumber, reservationId, reservationRequest);
         APIResponse<ReservationResponse> responseDTO = APIResponse
                 .<ReservationResponse>builder()
                 .status(SUCCESS)

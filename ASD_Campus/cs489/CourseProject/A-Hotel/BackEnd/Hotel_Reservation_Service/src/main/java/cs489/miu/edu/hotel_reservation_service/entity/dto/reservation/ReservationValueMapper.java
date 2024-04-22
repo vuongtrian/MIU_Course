@@ -3,6 +3,7 @@ package cs489.miu.edu.hotel_reservation_service.entity.dto.reservation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cs489.miu.edu.hotel_reservation_service.entity.Reservation;
+import cs489.miu.edu.hotel_reservation_service.entity.dto.room.RoomValueMapper;
 
 public class ReservationValueMapper {
     public static Reservation convertToEntity(ReservationRequest reservationRequest) {
@@ -20,7 +21,8 @@ public class ReservationValueMapper {
                 reservation.getStartDate(),
                 reservation.getEndDate(),
                 reservation.getTotalPrice(),
-                reservation.getNumberOfGuest()
+                reservation.getNumberOfGuest(),
+                RoomValueMapper.convertToDto(reservation.getRoom())
         );
     }
 

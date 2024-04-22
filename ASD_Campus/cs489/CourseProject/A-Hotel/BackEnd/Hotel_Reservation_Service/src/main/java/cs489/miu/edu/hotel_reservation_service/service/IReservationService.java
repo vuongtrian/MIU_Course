@@ -6,8 +6,8 @@ import cs489.miu.edu.hotel_reservation_service.entity.dto.reservation.Reservatio
 import java.util.List;
 
 public interface IReservationService {
-    ReservationResponse createReservation(ReservationRequest reservationRequest);
-    ReservationResponse updateReservation(Integer reservationId, ReservationRequest reservationRequest);
+    ReservationResponse createReservation(Integer roomNumber ,ReservationRequest reservationRequest);
+    ReservationResponse updateReservation(Integer roomNumber, Integer reservationId, ReservationRequest reservationRequest);
     void deleteReservationById(Integer reservationId);
     ReservationResponse getReservationById(Integer reservationId);
     List<ReservationResponse> getAllReservations();

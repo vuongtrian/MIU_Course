@@ -23,9 +23,10 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "roomNumber")
     private Room room;
-    @ManyToOne
-    @JoinColumn(name = "customerId")
-    private Customer customer;
+//    @ManyToOne
+//    @JoinColumn(name = "customerId")
+//    private Customer customer;
+
 
     public Reservation(LocalDate startDate, LocalDate endDate, BigDecimal totalPrice, Integer numberOfGuest) {
         this.startDate = startDate;

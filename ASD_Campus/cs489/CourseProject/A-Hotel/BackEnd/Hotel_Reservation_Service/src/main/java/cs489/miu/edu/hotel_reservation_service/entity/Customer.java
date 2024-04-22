@@ -15,8 +15,8 @@ public class Customer extends User{
     private Address address;
     @Embedded
     private CreditCard creditCard;
-    @OneToMany(mappedBy = "customer")
-    private List<Reservation> reservations = new ArrayList<>();
+//    @OneToMany(mappedBy = "customer")
+//    private List<Reservation> reservations = new ArrayList<>();
 
 
 }

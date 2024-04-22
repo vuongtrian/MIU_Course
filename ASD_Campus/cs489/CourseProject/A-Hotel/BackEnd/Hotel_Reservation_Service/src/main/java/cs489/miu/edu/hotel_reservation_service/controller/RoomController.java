@@ -21,8 +21,9 @@ public class RoomController {
     private IRoomService roomService;
 
     @PostMapping
-    public ResponseEntity<APIResponse> createRoom (@RequestBody @Valid RoomRequest roomRequest) {
-        RoomResponse roomResponse = roomService.createRoom(roomRequest);
+    public ResponseEntity<APIResponse> createRoom (@RequestParam int roomDetailId,
+                                                   @RequestParam int roomNumber) {
+        RoomResponse roomResponse = roomService.createRoom(roomDetailId, roomNumber);
         APIResponse<RoomResponse> responseDTO = APIResponse
                 .<RoomResponse>builder()
                 .status(SUCCESS)
@@ -32,8 +33,8 @@ public class RoomController {
     }
 
     @PutMapping("/{roomNumber}")
-    public ResponseEntity<APIResponse> updateRoom (@PathVariable int roomNumber, @RequestBody @Valid RoomRequest roomRequest) {
-        RoomResponse roomResponse = roomService.updateRoom(roomNumber, roomRequest);
+    public ResponseEntity<APIResponse> updateRoom (@PathVariable int roomNumber, @RequestParam int roomDetailId) {
+        RoomResponse roomResponse = roomService.updateRoom(roomDetailId, roomNumber);
         APIResponse<RoomResponse> responseDTO = APIResponse
                 .<RoomResponse>builder()
                 .status(SUCCESS)
