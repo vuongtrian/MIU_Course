@@ -12,6 +12,7 @@ import cs489.miu.edu.hotel_reservation_service.exception.RoomDetailNotFoundExcep
 import cs489.miu.edu.hotel_reservation_service.exception.RoomDetailServiceException;
 import cs489.miu.edu.hotel_reservation_service.repository.IRoomDetailRepository;
 import cs489.miu.edu.hotel_reservation_service.service.IRoomDetailService;
+import cs489.miu.edu.hotel_reservation_service.service.IRoomService;
 import cs489.miu.edu.hotel_reservation_service.util.ImageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class RoomDetailService implements IRoomDetailService {
 
     @Autowired
     private IRoomDetailRepository roomDetailRepository;
+
+    @Autowired
+    private IRoomService roomService;
 
     @Override
     public RoomDetailResponse createRoomDetail(RoomDetailRequest roomDetailRequest) {

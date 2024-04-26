@@ -2,7 +2,6 @@ package cs489.miu.edu.hotel_reservation_service.service.impl;
 
 import cs489.miu.edu.hotel_reservation_service.entity.FileData;
 import cs489.miu.edu.hotel_reservation_service.entity.RoomDetail;
-import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileRequest;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileResponse;
 import cs489.miu.edu.hotel_reservation_service.entity.dto.file.FileValueMapper;
 import cs489.miu.edu.hotel_reservation_service.exception.FileDataNotFoundException;
@@ -16,10 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -103,6 +103,19 @@ public class ImageService implements IImageService {
             return Files.readAllBytes(filePath);
         } catch (Exception e) {
             throw new FileDataServiceException("Exception occurred while fetch image id " + id + " from database");
+        }
+    }
+
+    @Override
+    public byte[] getImageByRoomDetailId(Integer roomDetailId) {
+        try {
+            FileData image = fileDataRepository.findByRoomDetailId(roomDetailId);
+            String imagePath = image.getPath();
+            String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
+            Path filePath = Paths.get(getImageDirectory(), fileName);
+            return Files.readAllBytes(filePath);
+        } catch (Exception e) {
+            throw new FileDataServiceException("Exception occurred while fetch image which has room detail id " + roomDetailId + " from database");
         }
     }
 

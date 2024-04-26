@@ -21,13 +21,6 @@ public class RoomDetailValueMapper {
                 roomDetailRequest.bedType(),
                 roomDetailRequest.numberOfBeds(),
                 roomDetailRequest.description()
-//                roomDetailRequest.rooms() == null || roomDetailRequest.rooms().isEmpty() ?
-//                        new ArrayList<>() :
-//                        roomDetailRequest.rooms().stream().map(RoomValueMapper::convertToEntity).toList(),
-//                roomDetailRequest.images() == null ?
-//                        new ArrayList<>() :
-//                        roomDetailRequest.images().stream().map(FileValueMapper::convertToEntity).toList()
-
         );
 
     }

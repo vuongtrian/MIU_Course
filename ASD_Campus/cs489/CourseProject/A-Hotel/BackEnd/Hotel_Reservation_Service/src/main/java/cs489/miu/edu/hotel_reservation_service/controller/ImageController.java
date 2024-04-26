@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/images")
 public class ImageController {
@@ -45,6 +47,14 @@ public class ImageController {
     @GetMapping("/{imageId}")
     public ResponseEntity<?> getImageById(@PathVariable int imageId) {
         byte[] imageResponse = imageService.getImageById(imageId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf("image/png"))
+                .body(imageResponse);
+    }
+
+    @GetMapping(value = "/roomDetails/{roomDetailId}")
+    public ResponseEntity<?> getImageByRoomDetail(@PathVariable int roomDetailId) {
+        byte[] imageResponse = imageService.getImageByRoomDetailId(roomDetailId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageResponse);
