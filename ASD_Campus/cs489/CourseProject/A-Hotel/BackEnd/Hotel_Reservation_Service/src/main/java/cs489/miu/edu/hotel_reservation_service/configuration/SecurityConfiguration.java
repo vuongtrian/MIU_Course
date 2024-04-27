@@ -27,7 +27,10 @@ public class SecurityConfiguration {
                         auth -> {
                             auth.requestMatchers("/management/auth/**").permitAll()
                                     .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+                                    .requestMatchers("/api/v1/reservations/**").permitAll()
+                                    .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
                                     .anyRequest().authenticated();
+//                                    .anyRequest().permitAll();
                         }
                 )
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
